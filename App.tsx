@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 
 
 import { SignIn } from './src/screens/Signin';
+import { Background } from './src/components/Background';
 import { StatusBar } from 'react-native';
 
 const App = () => {
@@ -16,18 +17,19 @@ const App = () => {
     Rajdhani_700Bold
   });
 
-  if (!fontsLoaded)
-    return <AppLoading />;
+  if (!fontsLoaded) {
+    return <AppLoading />
+  };
 
   return (
-    <>
+    <Background>
       <StatusBar
         barStyle='light-content'
         backgroundColor="transparent"
         translucent
       />
       <SignIn />
-    </>
+    </Background>
   );
 }
 
