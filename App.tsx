@@ -6,6 +6,7 @@ import { useFonts } from 'expo-font';
 
 
 import { SignIn } from './src/screens/Signin';
+import { Home } from './src/screens/Home';
 import { Background } from './src/components/Background';
 import { StatusBar } from 'react-native';
 
@@ -28,7 +29,7 @@ const App = () => {
         backgroundColor="transparent"
         translucent
       />
-      <SignIn />
+      <Home />
     </Background>
   );
 }
