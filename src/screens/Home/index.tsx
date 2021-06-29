@@ -4,6 +4,7 @@ import { styles } from './styles'
 import { Profile } from '../../components/Profile';
 import { ButtonAdd } from '../../components/ButtonAdd';
 import { CategorySelect } from '../../components/CategorySelect';
+import { ListHeader } from '../../components/ListHeader';
 
 export const Home = () => {
   const [category, setCategory] = useState('')
@@ -24,6 +25,9 @@ export const Home = () => {
           categorySelected={category}
           setCategory={handleCategorySelected}
         />
+      </View>
+      <View style={styles.content}>
+          <ListHeader title="Partidas agendadas" subtitle="Total 6"/>
       </View>
     </View>
   );
