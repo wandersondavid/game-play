@@ -25,13 +25,12 @@ export const Category = ({ key, title, icon: Icon, checked = false, ...rest }: P
         colors={[theme.colors.secondary50, theme.colors.secondary70]}
       >
         <View style={[styles.content, { opacity: checked ? 1 : 0.4 }]}>
-          <View style={checked ? styles.checked : styles.check}>
-            <Icon
-              width={48}
-              height={48}
-            />
-          </View>
-          <Text>
+          <View style={checked ? styles.checked : styles.check} />
+          <Icon
+            width={48}
+            height={48}
+          />
+          <Text style={styles.title} >
             {title}
           </Text>
         </View>

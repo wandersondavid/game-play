@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, Image } from 'react-native';
 import { styles } from './styles'
 import { Profile } from '../../components/Profile';
@@ -6,6 +6,12 @@ import { ButtonAdd } from '../../components/ButtonAdd';
 import { CategorySelect } from '../../components/CategorySelect';
 
 export const Home = () => {
+  const [category, setCategory] = useState('')
+
+  const handleCategorySelected = (categoryId: string) => {
+    categoryId === category ? setCategory('') : setCategory(categoryId);
+  }
+
   return (
     <View style={styles.container}>
 
@@ -14,7 +20,10 @@ export const Home = () => {
         <ButtonAdd />
       </View>
       <View>
-        <CategorySelect />
+        <CategorySelect
+          categorySelected={category}
+          setCategory={handleCategorySelected}
+        />
       </View>
     </View>
   );
