@@ -44,6 +44,7 @@ export const styles = StyleSheet.create({
   title: {
     fontFamily: theme.fonts.title700,
     color: '#fff',
-    fontSize: 15
+    fontSize: 15,
+    marginTop: 19,
   },
 });
