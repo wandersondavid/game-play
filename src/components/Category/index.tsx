@@ -11,10 +11,10 @@ type Props = RectButtonProps & {
   title: string;
   icon: React.FC<SvgProps>;
   checked?: boolean;
-  hasChecked?: boolean;
+  hasCheckBox?: boolean;
 }
 
-export const Category = ({ key, title, icon: Icon, checked = false, hasChecked = false, ...rest }: Props) => {
+export const Category = ({ key, title, icon: Icon, checked = false, hasCheckBox = false, ...rest }: Props) => {
   return (
     <RectButton
       key={key}
@@ -30,7 +30,7 @@ export const Category = ({ key, title, icon: Icon, checked = false, hasChecked =
           colors={[checked ? theme.colors.secondary85 : theme.colors.secondary50, theme.colors.secondary40]}
 
         >
-          {hasChecked &&
+          {hasCheckBox &&
             <View
               style={checked ? styles.checked : styles.check}
             />}

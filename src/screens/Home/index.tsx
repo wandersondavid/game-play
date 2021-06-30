@@ -7,6 +7,8 @@ import { CategorySelect } from '../../components/CategorySelect';
 import { ListHeader } from '../../components/ListHeader';
 import { Appointment } from '../../components/Appointment';
 import { ListDivider } from '../../components/ListDivider';
+import { Background } from '../../components/Background';
+
 export const Home = () => {
   const [category, setCategory] = useState('')
 
@@ -42,8 +44,7 @@ export const Home = () => {
   }
 
   return (
-    <View style={styles.container}>
-
+    <Background>
       <View style={styles.header}>
         <Profile />
         <ButtonAdd />
@@ -69,6 +70,6 @@ export const Home = () => {
           showsHorizontalScrollIndicator={false}
         />
       </View>
-    </View>
+    </Background>
   );
 }

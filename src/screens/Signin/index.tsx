@@ -4,6 +4,7 @@ import { styles } from './styles'
 import IllustrationImg from '../../assets/illustration.png'
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { useNavigation } from '@react-navigation/native'
+import { Background } from '../../components/Background';
 
 
 export const SignIn = () => {
@@ -13,28 +14,30 @@ export const SignIn = () => {
     navigation.navigate('Home')
   }
   return (
-    <View style={styles.container}>
-      <Image
-        source={IllustrationImg}
-        style={styles.image}
-        resizeMode="stretch"
-      />
+    <Background>
+      <View style={styles.container}>
+        <Image
+          source={IllustrationImg}
+          style={styles.image}
+          resizeMode="stretch"
+        />
 
-      <View style={styles.content}>
-        <Text style={styles.title}>
-          Conecte-se{`\n`}
+        <View style={styles.content}>
+          <Text style={styles.title}>
+            Conecte-se{`\n`}
           e organize suas{`\n`}
           jogatinas
         </Text>
-        <Text style={styles.subTitle}>
-          Crie grupos para jogar seus games{`\n`}
+          <Text style={styles.subTitle}>
+            Crie grupos para jogar seus games{`\n`}
           favoritos com seus amigos
         </Text>
-        <ButtonIcon
-          text='Entrar com Discord'
-          onPress={handleSignIn}
-        />
+          <ButtonIcon
+            text='Entrar com Discord'
+            onPress={handleSignIn}
+          />
+        </View>
       </View>
-    </View>
+    </Background>
   );
 }
