@@ -16,33 +16,34 @@ export const styles = StyleSheet.create({
   content: {
     width: 100,
     height: 116,
-    backgroundColor: theme.colors.secondary40,
-    justifyContent: 'space-between',
     alignItems: 'center',
+    justifyContent: 'space-between',
     borderRadius: 8,
-    paddingVertical: 7
+    paddingVertical: 20
   },
   check: {
+    position: 'absolute',
+    top: 7,
+    right:7,
     width: 12,
     height: 12,
     backgroundColor: theme.colors.secondary100,
-    alignSelf:'flex-end',
-    marginRight:7,
     borderRadius: 3,
     borderColor: theme.colors.secondary50,
     borderWidth:2,
   },
   checked: {
+    position: 'absolute',
+    top: 7,
+    right:7,
     width: 8,
     height: 8,
     backgroundColor: theme.colors.primary,
-    alignSelf:'flex-end',
-    marginRight:7,
     borderRadius: 3,
   },
 
   title: {
-    fontFamily: theme.fonts.text500,
+    fontFamily: theme.fonts.title700,
     color: '#fff',
     fontSize: 15
   },

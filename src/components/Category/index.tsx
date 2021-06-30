@@ -7,13 +7,14 @@ import { Text, View } from 'react-native';
 import { styles } from './styles'
 
 type Props = RectButtonProps & {
-  key: string,
-  title: string,
-  icon: React.FC<SvgProps>,
-  checked?: boolean,
+  key: string;
+  title: string;
+  icon: React.FC<SvgProps>;
+  checked?: boolean;
+  hasChecked?: boolean;
 }
 
-export const Category = ({ key, title, icon: Icon, checked = false, ...rest }: Props) => {
+export const Category = ({ key, title, icon: Icon, checked = false, hasChecked = false, ...rest }: Props) => {
   return (
     <RectButton
       key={key}
@@ -24,8 +25,16 @@ export const Category = ({ key, title, icon: Icon, checked = false, ...rest }: P
         style={styles.container}
         colors={[theme.colors.secondary50, theme.colors.secondary70]}
       >
-        <View style={[styles.content, { opacity: checked ? 1 : 0.4 }]}>
-          <View style={checked ? styles.checked : styles.check} />
+        <LinearGradient
+          style={[styles.content, { opacity: checked ? 1 : 0.5 }]}
+          colors={[checked ? theme.colors.secondary85 : theme.colors.secondary50, theme.colors.secondary40]}
+
+        >
+          {hasChecked &&
+            <View
+              style={checked ? styles.checked : styles.check}
+            />}
+
           <Icon
             width={48}
             height={48}
@@ -33,7 +42,7 @@ export const Category = ({ key, title, icon: Icon, checked = false, ...rest }: P
           <Text style={styles.title} >
             {title}
           </Text>
-        </View>
+        </LinearGradient>
       </LinearGradient>
     </RectButton>
 
