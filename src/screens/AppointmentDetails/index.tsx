@@ -8,11 +8,12 @@ import { Header } from '../../components/Header';
 import { Fontisto } from '@expo/vector-icons'
 
 import { styles } from './styles'
+import { Member } from '../../components/Member';
 import { theme } from '../../global/styles/theme';
 import BannerImg from '../../assets/banner.png'
 import { ListHeader } from '../../components/ListHeader';
 import { ListDivider } from '../../components/ListDivider';
-import { Member } from '../../components/Member';
+import { ButtonIcon } from '../../components/ButtonIcon';
 
 
 export const AppointmentDetails = () => {
@@ -22,19 +23,19 @@ export const AppointmentDetails = () => {
     {
       id: '1',
       username: 'Wanderson David',
-      avatar_url:'https://github.com/wandersondavid.png',
+      avatar_url: 'https://github.com/wandersondavid.png',
       status: 'online'
     },
     {
       id: '3',
       username: 'Wanderson',
-      avatar_url:'https://github.com/wandersondavid.png',
+      avatar_url: 'https://github.com/wandersondavid.png',
       status: 'Ocupado'
     },
     {
       id: '3',
       username: 'David',
-      avatar_url:'https://github.com/wandersondavid.png',
+      avatar_url: 'https://github.com/wandersondavid.png',
       status: 'Indisponível'
     },
   ]
@@ -86,6 +87,9 @@ export const AppointmentDetails = () => {
         style={styles.members}
         showsHorizontalScrollIndicator={false}
       />
+      <View style={styles.footer}>
+        <ButtonIcon text="Entrar no servidor do Discord" />
+      </View>
     </Background>
   );
 }
