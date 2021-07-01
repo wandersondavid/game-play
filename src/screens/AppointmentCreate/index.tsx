@@ -39,6 +39,7 @@ export const AppointmentCreate = () => {
   const handleCategorySelected = (categoryId: string) => {
     categoryId === category ? setCategory('') : setCategory(categoryId);
   }
+
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
