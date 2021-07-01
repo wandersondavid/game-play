@@ -1,14 +1,15 @@
 import { StyleSheet } from 'react-native';
 import { theme } from '../../global/styles/theme';
+import { getBottomSpace } from 'react-native-iphone-x-helper'
 
 
 export const styles = StyleSheet.create({
   container: {
-    width: '75%',
-    height: 1,
-    backgroundColor: theme.colors.secondary40,
-    marginVertical: 31,
-    marginTop:2,
-    alignSelf: 'flex-end'
+    flex: 1,
+    alignItems: 'center',
+    paddingTop: 24,
+  },
+  guilds : {
+  width:'100%'
   },
 });
