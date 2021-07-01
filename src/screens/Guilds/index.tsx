@@ -1,12 +1,5 @@
-import React, { useState } from 'react';
-import { RectButton } from 'react-native-gesture-handler';
-
+import React from 'react';
 import { FlatList, View } from 'react-native';
-import { Background } from '../../components/Background';
-import { Header } from '../../components/Header';
-import { CategorySelect } from '../../components/CategorySelect';
-import { Feather } from '@expo/vector-icons'
-import { theme } from '../../global/styles/theme';
 import { styles } from './styles'
 import { ListDivider } from '../../components/ListDivider';
 import { Guild, GuildProps } from '../../components/Guild';
