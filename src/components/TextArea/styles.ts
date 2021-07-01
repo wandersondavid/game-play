@@ -10,10 +10,12 @@ export const styles = StyleSheet.create({
     color: theme.colors.heading,
     borderRadius: 8,
     fontFamily: theme.fonts.text400,
-    fontSize:13,
+    fontSize: 13,
     marginRight: 4,
-    textAlign: 'center',
     borderColor: theme.colors.secondary50,
     borderWidth: 1,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    textAlignVertical: 'top'
   },
 });
