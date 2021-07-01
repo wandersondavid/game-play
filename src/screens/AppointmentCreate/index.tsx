@@ -37,7 +37,7 @@ export const AppointmentCreate = () => {
   }
 
   const handleCategorySelected = (categoryId: string) => {
-    categoryId === category ? setCategory('') : setCategory(categoryId);
+    setCategory(categoryId);
   }
 
   return (
