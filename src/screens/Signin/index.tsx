@@ -6,13 +6,16 @@ import { ButtonIcon } from '../../components/ButtonIcon';
 import { useNavigation } from '@react-navigation/native'
 import { Background } from '../../components/Background';
 
+import { useAuth } from '../../hooks/auth'
 
 export const SignIn = () => {
   const navigation = useNavigation();
+  const { user } = useAuth();
 
   const handleSignIn = () => {
     navigation.navigate('Home')
   }
+
   return (
     <Background>
       <View style={styles.container}>
