@@ -88,7 +88,7 @@ export const AppointmentCreate = () => {
           <View style={styles.field}>
 
             <View>
-              <Text style={styles.label}>
+              <Text style={[styles.label, { marginBottom: 12}]}>
                 Dia e mês
             </Text>
               <View style={styles.column}>
@@ -101,7 +101,7 @@ export const AppointmentCreate = () => {
             </View>
 
             <View>
-              <Text style={styles.label}>
+              <Text style={[styles.label, { marginBottom: 12}]}>
                 Horário
             </Text>
               <View style={styles.column}>
