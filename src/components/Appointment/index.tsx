@@ -38,7 +38,7 @@ export const Appointment = ({ data, ...rest }: Props) => {
           style={styles.guildIconContainer}
           colors={[theme.colors.secondary50, theme.colors.secondary70]}
         >
-          <GuidIcon />
+          <GuidIcon guildId={data.guild.id} iconId={data.guild.icon} />
         </LinearGradient>
         <View style={styles.content}>
           <View style={styles.header}>
@@ -46,7 +46,7 @@ export const Appointment = ({ data, ...rest }: Props) => {
               {data.guild.name}
             </Text>
             <Text style={styles.category}>
-              {category.title}
+              {/* {category.title ? category.title : 'indefinido'} */}
             </Text>
           </View>
           <View style={styles.footer}>
