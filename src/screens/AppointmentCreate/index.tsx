@@ -15,6 +15,10 @@ import { Button } from '../../components/Button';
 import { Guilds } from '../Guilds';
 import { GuildProps } from '../../components/Guild';
 import { Background } from '../../components/Background';
+import uuid from 'react-native-uuid'
+import { COLLECTION_APPOINTMENTS } from '../../config/database';
+import AsyncStore from '@react-native-async-storage/async-storage'
+
 
 
 export const AppointmentCreate = () => {
@@ -22,6 +26,15 @@ export const AppointmentCreate = () => {
   const [category, setCategory] = useState('')
   const [openGuildsModal, setOpenGuildsModal] = useState(false);
   const [guild, setGuild] = useState({} as GuildProps);
+
+
+  const [day, setDay] = useState('')
+  const [month, setMonth] = useState('')
+  const [hour, setHour] = useState('')
+  const [minute, setMinute] = useState('')
+  const [description, setDescription] = useState('')
+
+  const navigation = useNavigation();
 
   const handlerOpenGuild = () => {
     setOpenGuildsModal(true);
@@ -38,6 +51,22 @@ export const AppointmentCreate = () => {
 
   const handleCategorySelected = (categoryId: string) => {
     setCategory(categoryId);
+  }
+
+  const handlerSave = async () => {
+    const newAppointment = {
+      id: uuid.v4(),
+      guild,
+      category,
+      date: `${day}/${month} às ${hour}:${minute}h`,
+      description
+    };
+
+    const storage = await AsyncStore.getItem(COLLECTION_APPOINTMENTS)
+    const appointments = storage ? JSON.parse(storage) : [];
+    await AsyncStore.setItem(COLLECTION_APPOINTMENTS, JSON.stringify([...appointments, newAppointment]));
+
+    navigation.navigate('Home')
   }
 
   return (
@@ -67,7 +96,7 @@ export const AppointmentCreate = () => {
 
                 {
                   guild.icon
-                    ? <GuidIcon guildId={guild.id} iconId={guild.icon}/>
+                    ? <GuidIcon guildId={guild.id} iconId={guild.icon} />
                     : <View style={styles.image} />
                 }
 
@@ -93,46 +122,60 @@ export const AppointmentCreate = () => {
               <View>
                 <Text style={[styles.label, { marginBottom: 12 }]}>
                   Dia e mês
-            </Text>
+                </Text>
                 <View style={styles.column}>
-                  <SmallInput maxLength={2} />
+                  <SmallInput
+                    onChangeText={setDay}
+                    maxLength={2}
+                  />
                   <Text style={styles.divider}>
                     /
-            </Text>
-                  <SmallInput maxLength={2} />
+                  </Text>
+                  <SmallInput
+                    onChangeText={setMonth}
+                    maxLength={2} />
                 </View>
               </View>
 
               <View>
                 <Text style={[styles.label, { marginBottom: 12 }]}>
                   Horário
-            </Text>
+                </Text>
                 <View style={styles.column}>
-                  <SmallInput maxLength={2} />
+                  <SmallInput
+                    maxLength={2}
+                    onChangeText={setHour}
+                  />
                   <Text style={styles.divider}>
                     :
-            </Text>
-                  <SmallInput maxLength={2} />
+                  </Text>
+                  <SmallInput
+                    onChangeText={setMinute}
+                    maxLength={2}
+                  />
                 </View>
               </View>
 
             </View>
+
             <View style={[styles.field, { marginBottom: 12 }]}>
               <Text style={styles.label}>
                 Descrição
-          </Text>
+              </Text>
               <Text style={styles.caracteresLimit}>
                 Max 100 caracteres
-          </Text>
+              </Text>
             </View>
+
             <TextArea
               multiline
               maxLength={100}
               numberOfLines={5}
               autoCorrect={false}
+              onChangeText={setDescription}
             />
             <View style={styles.footer}>
-              <Button text="Agendar" />
+              <Button text="Agendar" onPress={handlerSave}/>
             </View>
           </View>
 
