@@ -1,51 +1,57 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BorderlessButton, FlatList } from 'react-native-gesture-handler';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
-import { Text, View, ImageBackground } from 'react-native';
+import { Text, View, ImageBackground, Alert } from 'react-native';
 import { Background } from '../../components/Background';
 import { Header } from '../../components/Header';
 import { Fontisto } from '@expo/vector-icons'
 
 import { styles } from './styles'
-import { Member } from '../../components/Member';
+import { Member, MemberProps } from '../../components/Member';
 import { theme } from '../../global/styles/theme';
 import BannerImg from '../../assets/banner.png'
 import { ListHeader } from '../../components/ListHeader';
 import { ListDivider } from '../../components/ListDivider';
 import { ButtonIcon } from '../../components/ButtonIcon';
 import { AppointmentProps } from '../../components/Appointment';
+import { api } from '../../services/api';
+import { Load } from '../../components/Load';
 
 type Params = {
-  guildSelected : AppointmentProps;
+  guildSelected: AppointmentProps;
+}
+
+type GuildWidget = {
+  id: string;
+  name: string;
+  instant_invite: string;
+  members: MemberProps[];
+  presence_count: number;
 }
 
 export const AppointmentDetails = () => {
-  const navigation = useNavigation();
-
-  const members = [
-    {
-      id: '1',
-      username: 'Wanderson David',
-      avatar_url: 'https://github.com/wandersondavid.png',
-      status: 'online'
-    },
-    {
-      id: '3',
-      username: 'Wanderson',
-      avatar_url: 'https://github.com/wandersondavid.png',
-      status: 'Ocupado'
-    },
-    {
-      id: '3',
-      username: 'David',
-      avatar_url: 'https://github.com/wandersondavid.png',
-      status: 'Indisponível'
-    },
-  ]
+  const [widget, setWidget] = useState<GuildWidget>({} as GuildWidget);
+  const [loading, setLoading] = useState(false);
 
   const route = useRoute();
   const { guildSelected } = route.params as Params;
+
+  const fetchGuildWidget = async () => {
+    try {
+      const response = await api.get(`/guilds/${guildSelected.guild.id}/widget.json`)
+      setWidget(response.data)
+
+    } catch {
+      Alert.alert('Verifique as configuração do servidor')
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchGuildWidget()
+  }, [])
 
   return (
     <Background>
@@ -76,21 +82,26 @@ export const AppointmentDetails = () => {
           </Text>
         </View>
       </ImageBackground>
+      {loading ?
+        <Load />
+        :
+        <>
+          <ListHeader title="Jogadores" subtitle={`${widget.presence_count}`}/>
 
-      <ListHeader title="Jogadores" subtitle="Total 3" />
-
-      <FlatList
-        data={members}
-        keyExtractor={item => item.id}
-        renderItem={({ item }) => (
-          <Member
-            data={item}
+          <FlatList
+            data={widget.members}
+            keyExtractor={item => item.id}
+            renderItem={({ item }) => (
+              <Member
+                data={item}
+              />
+            )}
+            ItemSeparatorComponent={() => <ListDivider isCentered />}
+            style={styles.members}
+            showsHorizontalScrollIndicator={false}
           />
-        )}
-        ItemSeparatorComponent={() => <ListDivider isCentered />}
-        style={styles.members}
-        showsHorizontalScrollIndicator={false}
-      />
+        </>
+        }
       <View style={styles.footer}>
         <ButtonIcon text="Entrar no servidor do Discord" />
       </View>
