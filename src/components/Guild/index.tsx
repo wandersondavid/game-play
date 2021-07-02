@@ -25,7 +25,7 @@ export const Guild = ({ data, ...rest }: Props) => {
       {...rest}
     >
 
-      <GuidIcon />
+      <GuidIcon guildId={data.id} iconId={data.icon} />
 
       <View style={styles.content}>
         <View >

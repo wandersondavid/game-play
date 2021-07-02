@@ -8,7 +8,7 @@ import DiscordSvg from '../../assets/discord.svg';
 
 type Props = {
   guildId: string;
-  iconId: string;
+  iconId: string | null;
 }
 
 export const GuidIcon = ({ guildId, iconId }: Props) => {

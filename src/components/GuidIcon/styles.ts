@@ -10,6 +10,7 @@ export const styles = StyleSheet.create({
     backgroundColor: theme.colors.discord,
     justifyContent:'center',
     alignItems: 'center',
+    overflow: 'hidden',
   },
   image: {
     width: 67,
