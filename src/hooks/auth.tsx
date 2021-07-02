@@ -37,7 +37,8 @@ type AuthProviderProps = {
 
 type AuthorizationResponse = AuthSession.AuthSessionResult & {
   params: {
-    access_token: string;
+    access_token?: string;
+    error?: string;
   }
 }
 export const AuthContext = createContext({} as AuthContextData);
@@ -54,7 +55,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
       const { type, params } = await AuthSession.startAsync({ authUrl }) as AuthorizationResponse;
 
-      if (type === "success") {
+      if (type === "success" && !params.error) {
         api.defaults.headers.authorization = `Bearer ${params.access_token}`
 
         const userInfo = await api.get('/users/@me');
@@ -67,14 +68,12 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
           token: params.access_token
         })
 
-        setLoading(false);
-
-      }else {
-        setLoading(false);
       }
 
     } catch {
       throw new Error("Não autorizado");
+    } finally {
+      setLoading(false);
     }
   }
 

@@ -83,7 +83,7 @@ export const AppointmentDetails = () => {
             data={item}
           />
         )}
-        ItemSeparatorComponent={() => <ListDivider />}
+        ItemSeparatorComponent={() => <ListDivider isCentered />}
         style={styles.members}
         showsHorizontalScrollIndicator={false}
       />

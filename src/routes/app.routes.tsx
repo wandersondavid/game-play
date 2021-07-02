@@ -1,14 +1,14 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack'
 
-import { Home } from '../../src/screens/Home';
+import { Home } from '../screens/Home';
 import { theme } from '../global/styles/theme';
-import { AppointmentDetails } from '../../src/screens/AppointmentDetails';
-import { AppointmentCreate } from '../../src/screens/AppointmentCreate';
+import { AppointmentDetails } from '../screens/AppointmentDetails';
+import { AppointmentCreate } from '../screens/AppointmentCreate';
 const { Navigator, Screen } = createStackNavigator();
 
 
-export const AuthRouter = () => {
+export const AppRouter = () => {
 
   return (
     <Navigator
