@@ -17,7 +17,7 @@ import { Load } from '../../components/Load';
 export const Home = () => {
   const [category, setCategory] = useState('')
   const [appointments, setAppointments] = useState<AppointmentProps[]>([])
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
 
   const navigation = useNavigation();

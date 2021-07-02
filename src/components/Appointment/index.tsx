@@ -26,7 +26,6 @@ type Props = RectButtonProps & {
 
 export const Appointment = ({ data, ...rest }: Props) => {
   const [category] = categories.filter(item => item.id === data.category);
-
   const { owner } = data.guild;
 
   const { primary, on } = theme.colors
@@ -46,7 +45,7 @@ export const Appointment = ({ data, ...rest }: Props) => {
               {data.guild.name}
             </Text>
             <Text style={styles.category}>
-              {/* {category.title ? category.title : 'indefinido'} */}
+              {/* {category.title[0]} */}
             </Text>
           </View>
           <View style={styles.footer}>

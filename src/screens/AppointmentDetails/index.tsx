@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BorderlessButton, FlatList } from 'react-native-gesture-handler';
 import { useNavigation, useRoute } from '@react-navigation/native'
 
-import { Text, View, ImageBackground, Alert } from 'react-native';
+import { Text, View, ImageBackground, Alert, Share, Platform } from 'react-native';
 import { Background } from '../../components/Background';
 import { Header } from '../../components/Header';
 import { Fontisto } from '@expo/vector-icons'
@@ -32,7 +32,7 @@ type GuildWidget = {
 
 export const AppointmentDetails = () => {
   const [widget, setWidget] = useState<GuildWidget>({} as GuildWidget);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const route = useRoute();
   const { guildSelected } = route.params as Params;
@@ -48,7 +48,16 @@ export const AppointmentDetails = () => {
       setLoading(false)
     }
   }
+  const handleShareInvitation = () => {
+    const message = Platform.OS === 'ios'
+      ? `Junte-se a ${guildSelected.guild.name}`
+      : widget.instant_invite;
 
+      Share.share({
+        message,
+        url: widget.instant_invite
+      })
+  }
   useEffect(() => {
     fetchGuildWidget()
   }, [])
@@ -58,7 +67,7 @@ export const AppointmentDetails = () => {
       <Header
         title="Detalhes"
         action={
-          <BorderlessButton>
+          <BorderlessButton onPress={handleShareInvitation}>
             <Fontisto
               name="share"
               color={theme.colors.primary}
@@ -86,7 +95,7 @@ export const AppointmentDetails = () => {
         <Load />
         :
         <>
-          <ListHeader title="Jogadores" subtitle={`${widget.presence_count}`}/>
+          <ListHeader title="Jogadores" subtitle={`Total ${widget.members.length}`} />
 
           <FlatList
             data={widget.members}
@@ -101,7 +110,7 @@ export const AppointmentDetails = () => {
             showsHorizontalScrollIndicator={false}
           />
         </>
-        }
+      }
       <View style={styles.footer}>
         <ButtonIcon text="Entrar no servidor do Discord" />
       </View>
