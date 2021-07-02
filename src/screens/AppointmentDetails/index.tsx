@@ -17,6 +17,7 @@ import { ButtonIcon } from '../../components/ButtonIcon';
 import { AppointmentProps } from '../../components/Appointment';
 import { api } from '../../services/api';
 import { Load } from '../../components/Load';
+import * as Linking from 'expo-linking'
 
 type Params = {
   guildSelected: AppointmentProps;
@@ -53,11 +54,16 @@ export const AppointmentDetails = () => {
       ? `Junte-se a ${guildSelected.guild.name}`
       : widget.instant_invite;
 
-      Share.share({
-        message,
-        url: widget.instant_invite
-      })
+    Share.share({
+      message,
+      url: widget.instant_invite
+    })
   }
+
+  const handleOpenGuild = () => {
+    Linking.openURL(widget.instant_invite)
+  }
+
   useEffect(() => {
     fetchGuildWidget()
   }, [])
@@ -112,9 +118,11 @@ export const AppointmentDetails = () => {
           />
         </>
       }
-      <View style={styles.footer}>
-        <ButtonIcon text="Entrar no servidor do Discord" />
-      </View>
+      { guildSelected.guild.owner &&
+        <View style={styles.footer}>
+          <ButtonIcon text="Entrar no servidor do Discord" onPress={handleOpenGuild} />
+        </View>
+      }
     </Background>
   );
 }
