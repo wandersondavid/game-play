@@ -67,7 +67,7 @@ export const AppointmentCreate = () => {
 
                 {
                   guild.icon
-                    ? <GuidIcon />
+                    ? <GuidIcon guildId={guild.id} iconId={guild.icon}/>
                     : <View style={styles.image} />
                 }
 
