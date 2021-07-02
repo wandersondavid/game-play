@@ -1,6 +1,6 @@
 import React from 'react';
 import { BorderlessButton, FlatList } from 'react-native-gesture-handler';
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
 
 import { Text, View, ImageBackground } from 'react-native';
 import { Background } from '../../components/Background';
@@ -14,7 +14,11 @@ import BannerImg from '../../assets/banner.png'
 import { ListHeader } from '../../components/ListHeader';
 import { ListDivider } from '../../components/ListDivider';
 import { ButtonIcon } from '../../components/ButtonIcon';
+import { AppointmentProps } from '../../components/Appointment';
 
+type Params = {
+  guildSelected : AppointmentProps;
+}
 
 export const AppointmentDetails = () => {
   const navigation = useNavigation();
@@ -40,9 +44,9 @@ export const AppointmentDetails = () => {
     },
   ]
 
-  const handleSignIn = () => {
-    navigation.navigate('Home')
-  }
+  const route = useRoute();
+  const { guildSelected } = route.params as Params;
+
   return (
     <Background>
       <Header
@@ -64,11 +68,11 @@ export const AppointmentDetails = () => {
         <View style={styles.bannerContent}>
 
           <Text style={styles.title}>
-            League of Legends
+            {guildSelected.guild.name}
           </Text>
 
           <Text style={styles.subtitle}>
-            É hoje que vamos chegar ao challenger sem perder uma partida da md10
+            {guildSelected.description}
           </Text>
         </View>
       </ImageBackground>

@@ -27,8 +27,8 @@ export const Home = () => {
     categoryId === category ? setCategory('') : setCategory(categoryId);
   }
 
-  const handlerAppointmentsDetails = () => {
-    navigation.navigate('AppointmentDetails')
+  const handlerAppointmentsDetails = (guildSelected: AppointmentProps) => {
+    navigation.navigate('AppointmentDetails', { guildSelected })
   }
 
 
@@ -75,7 +75,7 @@ export const Home = () => {
             renderItem={({ item }) => (
               <Appointment
                 data={item}
-                onPress={handlerAppointmentsDetails}
+                onPress={() => handlerAppointmentsDetails(item)}
               />
             )}
             ItemSeparatorComponent={() => <ListDivider />}
